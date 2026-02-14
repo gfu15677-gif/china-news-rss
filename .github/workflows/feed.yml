@@ -1,0 +1,28 @@
+name: Get Feed
+
+on:
+  schedule:
+    - cron: '0 * * * *'        # 每小时运行一次
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install feedparser requests python-dotenv markdownify beautifulsoup4
+
+      - name: Run feed
+        env:
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          RUN_FREQUENCY: 86400   # 临时24小时，以后可改回3600
+        run: python main.py
