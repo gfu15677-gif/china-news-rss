@@ -7,17 +7,21 @@ from helpers import time_difference
 
 load_dotenv()
 
-# 临时设为 24 小时（确保能抓到东西）
+# 你可以根据需要调整抓取时间窗口，这里设为24小时（86400秒）
 RUN_FREQUENCY = int(os.getenv("RUN_FREQUENCY", "86400"))
 
-# ===== 热门技术资讯 RSS 源（肯定有内容）=====
+# ===== 国内热门资讯 RSS 源（持续更新）=====
 RSS_URLS = [
-    "https://techcrunch.com/feed/",
-    "https://hnrss.org/frontpage",
-    "https://www.theverge.com/tech/rss/index.xml",
-    "https://feeds.arstechnica.com/arstechnica/index",
-    "https://www.wired.com/feed/rss",
-    "https://www.artificialintelligence-news.com/feed/",
+    "https://36kr.com/feed",                          # 36氪
+    "https://www.guokr.com/rss/",                     # 果壳
+    "https://feeds.feedburner.com/zhihu-daily",       # 知乎每日精选
+    "https://www.thepaper.cn/rss/news.xml",           # 澎湃新闻
+    "https://www.guancha.cn/feed/news.xml",           # 观察者网
+    "https://www.huxiu.com/rss/",                     # 虎嗅
+    "https://rss.sina.com.cn/tech/rollnews.xml",      # 新浪科技
+    "https://rss.qq.com/tech/rollnews.xml",           # 腾讯科技
+    "http://www.people.com.cn/rss/politics.xml",      # 人民网
+    "https://news.163.com/special/00011K6L/rss_news.xml", # 网易新闻
 ]
 
 def _parse_struct_time_to_timestamp(st):
